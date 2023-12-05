@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(
         name = "FindAddressByZipCodeClient",
-        url = "${jhonatas.client.address.url} "
+        url = "${jhonatas.client.address.url}"
+//        url = "localhost:8082/addresses"
 )
 public interface FindAddressByZipCodeClient {
     @GetMapping("/{zipCode}")

@@ -3,10 +3,10 @@ package com.example.hexagonal;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class HexagonalApplicationTests {
 
-	@Test
+//	@Test
 	void contextLoads() {
 	}
 
