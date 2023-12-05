@@ -23,3 +23,4 @@ public class InsertCustomerAdapter implements InsertCustomerOutpuPort {
         customerRepository.save(customerEntity);
     }
 }
+//
