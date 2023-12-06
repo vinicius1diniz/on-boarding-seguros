@@ -1,6 +1,6 @@
-package com.picpay.repository;
+package com.picpay.database.repository;
 
-import com.picpay.hexagonal.adapters.out.repository.entity.CustomerEntity;
+import com.picpay.database.entity.CustomerEntity;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface CustomerRepository extends MongoRepository<CustomerEntity, String> {

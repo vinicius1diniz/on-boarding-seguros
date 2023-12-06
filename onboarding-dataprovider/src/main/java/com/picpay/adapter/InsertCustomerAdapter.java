@@ -1,12 +1,12 @@
-package com.picpay.hexagonal.adapters.out;
+package com.picpay.adapter;
 
-import com.picpay.hexagonal.adapters.out.repository.CustomerRepository;
-import com.picpay.hexagonal.adapters.out.repository.entity.CustomerEntity;
-import com.picpay.hexagonal.adapters.out.repository.mapper.CustomerEntityMapper;
-import com.picpay.hexagonal.application.core.domain.Customer;
-import com.picpay.hexagonal.application.ports.out.InsertCustomerOutpuPort;
+import com.picpay.database.entity.CustomerEntity;
+import com.picpay.database.repository.CustomerRepository;
+import com.picpay.mapper.CustomerEntityMapper;
+import com.picpay.domain.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import com.picpay.ports.out.InsertCustomerOutpuPort;
 
 @Component
 public class InsertCustomerAdapter implements InsertCustomerOutpuPort {
@@ -17,9 +17,8 @@ public class InsertCustomerAdapter implements InsertCustomerOutpuPort {
     @Autowired
     private CustomerEntityMapper customerEntityMapper;
 
-    @Override
     public void insert(Customer customer) {
-        var customerEntity = customerEntityMapper.toCustomerEntity(customer);
+        CustomerEntity customerEntity = customerEntityMapper.toCustomerEntity(customer);
         customerRepository.save(customerEntity);
     }
 }

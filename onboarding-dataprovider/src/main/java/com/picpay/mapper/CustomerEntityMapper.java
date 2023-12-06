@@ -1,10 +1,8 @@
-package com.picpay.hexagonal.adapters.out.repository.mapper;
+package com.picpay.mapper;
 
-import com.picpay.hexagonal.adapters.out.repository.entity.CustomerEntity;
-import com.picpay.hexagonal.application.core.domain.Customer;
+import com.picpay.database.entity.CustomerEntity;
+import com.picpay.domain.Customer;
 import org.mapstruct.Mapper;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 @Mapper(componentModel = "spring")
 public interface CustomerEntityMapper {

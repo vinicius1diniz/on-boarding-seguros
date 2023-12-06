@@ -1,7 +1,7 @@
-package com.example.hexagonal.application.ports.out;
+package com.picpay.ports.out;
 
 public interface SendCpfForValidationOutputPort {
 
-    void send(String cpf);
+    boolean sendValidation(String cpf);
 
 }

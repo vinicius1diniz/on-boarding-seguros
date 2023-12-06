@@ -1,7 +1,6 @@
-package com.example.hexagonal.application.ports.in;
+package com.picpay.ports.in;
 
-import com.example.hexagonal.adapters.in.controller.request.CustomerRequest;
-import com.example.hexagonal.application.core.domain.Customer;
+import com.picpay.domain.Customer;
 
 public interface InsertCustomerInputPort {
 

@@ -6,7 +6,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Adress {
+public class Address {
 
 
     private String street;

@@ -1,15 +1,20 @@
-package com.picpay.controller;
+package com.picpay.adapter.controller;
 
 
-import com.picpay.hexagonal.adapters.in.controller.mapper.CustomerMapper;
-import com.picpay.hexagonal.adapters.in.controller.request.CustomerRequest;
-import com.picpay.hexagonal.application.ports.in.InsertCustomerInputPort;
+import com.picpay.adapter.controller.mapper.CustomerMapper;
+import com.picpay.adapter.controller.request.CustomerRequest;
+import com.picpay.ports.in.InsertCustomerInputPort;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+//@Api(value = "Customer")
 @RequestMapping("/api/v1/customers")
 public class CustomerController {
 
@@ -19,7 +24,8 @@ public class CustomerController {
     @Autowired
     private CustomerMapper customerMapper;
 
-    @PostMapping(value = "/post")
+//    @ApiOperation(value = "Inseri customer, validando seu cpf")
+    @PostMapping(value = "/post", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> insert(@Valid @RequestBody CustomerRequest customerRequest){
         var customer = customerMapper.toCustomer(customerRequest);
         insertCustomerInputPort.insert(customer, customerRequest.getZipCode());

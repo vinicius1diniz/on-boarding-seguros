@@ -1,8 +1,8 @@
-package com.example.hexagonal.application.ports.out;
+package com.picpay.ports.out;
 
-import com.example.hexagonal.application.core.domain.Adress;
+import com.picpay.domain.Address;
 
 public interface FindAddressByZipCodeOutpuPort {
 
-    Adress find(String zipcode);
+    Address find(String zipcode);
 }

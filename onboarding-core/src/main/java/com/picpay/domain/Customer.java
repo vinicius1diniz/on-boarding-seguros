@@ -1,9 +1,8 @@
-package com.example.hexagonal.application.core.domain;
+package com.picpay.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Data
 @AllArgsConstructor
@@ -11,7 +10,7 @@ import lombok.ToString;
 public class Customer {
  private String name;
 
- private Adress adress;
+ private Address address;
  private String cpf;
  private Boolean isValidCpf;
  private String zipCode;
