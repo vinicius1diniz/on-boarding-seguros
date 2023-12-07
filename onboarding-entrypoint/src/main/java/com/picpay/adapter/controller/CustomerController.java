@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,11 +25,15 @@ public class CustomerController {
     @Autowired
     private CustomerMapper customerMapper;
 
-//    @ApiOperation(value = "Inseri customer, validando seu cpf")
+//    @ApiOperation(value = "Insere customer, validando seu cpf")
     @PostMapping(value = "/post", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> insert(@Valid @RequestBody CustomerRequest customerRequest){
         var customer = customerMapper.toCustomer(customerRequest);
-        insertCustomerInputPort.insert(customer, customerRequest.getZipCode());
-        return ResponseEntity.ok().body("Inserido com sucesso");
+        boolean status = insertCustomerInputPort.insert(customer, customerRequest.getZipCode());
+        if (status == true){
+            return ResponseEntity.ok().body("Inserido com sucesso");
+        } else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invalid Zip Code");
+        }
     }
 }

@@ -22,11 +22,19 @@ public class InsertCustomerUseCase implements InsertCustomerInputPort {
 
 
     @Override
-    public void insert(Customer customer, String zipCode ){
-        var address = findAddressByZipCodeOutpuPort.find(zipCode);
-        customer.setAddress(address);
-        customer.setIsValidCpf(sendCpfForValidationOutputPort.sendValidation(customer.getCpf()));
-        insertCustomerOutpuPort.insert(customer);
+    public boolean insert(Customer customer, String zipCode ){
+        try{
+            var address = findAddressByZipCodeOutpuPort.find(zipCode);
+            customer.setAddress(address);
+            sendCpfForValidationOutputPort.sendValidation(customer.getCpf());
+//            customer.setIsValidCpf(sendCpfForValidationOutputPort.sendValidation(customer.getCpf()));
+            insertCustomerOutpuPort.insert(customer);
+            return true;
+        } catch (Exception e){
+            System.out.println(e);
+            return false;
+        }
+
 
     }
 
