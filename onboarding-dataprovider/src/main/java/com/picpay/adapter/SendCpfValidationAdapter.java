@@ -1,6 +1,8 @@
 package com.picpay.adapter;
 
+import com.picpay.kafka.KafkaProducer;
 import com.picpay.ports.out.SendCpfForValidationOutputPort;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.br.CPF;
 import org.hibernate.validator.internal.constraintvalidators.hv.br.CPFValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,17 +13,12 @@ import java.util.HashMap;
 import java.util.Objects;
 
 @Component
+@RequiredArgsConstructor
 public class SendCpfValidationAdapter implements SendCpfForValidationOutputPort {
 
-    @Autowired
-    private KafkaTemplate<String, String> kafkaTemplate;
+    private final KafkaProducer<String> kafkaProducer;
     @Override
     public void sendValidation(String cpf) {
-        CPFValidator cpfValidator = new CPFValidator();
-        HashMap<String, Object> kafkaObject = new HashMap<>();
-        boolean status = true;
-        kafkaObject.put("cpf", cpf);
-        kafkaObject.put("status", status);
-        kafkaTemplate.send("tp-cpf-validation", String.valueOf(kafkaObject));
+        kafkaProducer.publish(cpf, "sendCPF-out-0");
         }
 }

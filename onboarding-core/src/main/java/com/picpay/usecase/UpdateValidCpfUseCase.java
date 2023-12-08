@@ -7,11 +7,12 @@ import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
-public class ValidateCpfUseCase implements ValidateCpfInputPort {
+public class UpdateValidCpfUseCase implements ValidateCpfInputPort {
     private final ValidateCpfOutputPort validateCpfOutputPort;
 
     @Override
     public void validate(String cpf, boolean status){
+
         validateCpfOutputPort.updateValidCpf(cpf, status);
     }
 }

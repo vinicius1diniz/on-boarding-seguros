@@ -29,11 +29,13 @@ public class CustomerController {
     @PostMapping(value = "/post", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> insert(@Valid @RequestBody CustomerRequest customerRequest){
         var customer = customerMapper.toCustomer(customerRequest);
-        boolean status = insertCustomerInputPort.insert(customer, customerRequest.getZipCode());
-        if (status == true){
+        try{
+            insertCustomerInputPort.insert(customer, customerRequest.getZipCode());
             return ResponseEntity.ok().body("Inserido com sucesso");
-        } else{
+
+        } catch (Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invalid Zip Code");
+
         }
     }
 }
