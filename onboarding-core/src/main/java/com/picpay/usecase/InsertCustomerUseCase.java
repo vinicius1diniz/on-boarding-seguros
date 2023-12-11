@@ -26,7 +26,6 @@ public class InsertCustomerUseCase implements InsertCustomerInputPort {
         customer.setAddress(address);
         insertCustomerOutpuPort.insert(customer);
         sendCpfForValidationOutputPort.sendValidation(customer.getCpf());
-        validateAndPublishCpfUseCase.validateAndPublish(customer.getCpf());
     }
 
 }
