@@ -30,8 +30,11 @@ public class CustomerController {
     public ResponseEntity<String> insert(@Valid @RequestBody CustomerRequest customerRequest){
         var customer = customerMapper.toCustomer(customerRequest);
         try{
-            insertCustomerInputPort.insert(customer, customerRequest.getZipCode());
-            return ResponseEntity.ok().body("Inserido com sucesso");
+            boolean response = insertCustomerInputPort.insert(customer, customerRequest.getZipCode());
+            if(response){
+                return ResponseEntity.ok().body("Inserido com sucesso");
+            }
+            return ResponseEntity.ok().body("CPF já cadastrado na base");
 
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invalid Zip Code");

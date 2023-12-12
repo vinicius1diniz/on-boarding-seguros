@@ -61,5 +61,5 @@ spring:
           destination: tp-cpf-validation-return
           group: tp-cpf-group-validation2
           contentType: application/json
-      function:
-        definition: receiveCPF
+    function:
+      definition: receiveCPF;validateCPF

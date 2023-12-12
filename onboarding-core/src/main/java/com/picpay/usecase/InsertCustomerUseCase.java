@@ -4,7 +4,6 @@ import com.picpay.domain.Customer;
 import com.picpay.ports.in.InsertCustomerInputPort;
 import com.picpay.ports.out.FindAddressByZipCodeOutpuPort;
 import com.picpay.ports.out.InsertCustomerOutpuPort;
-import com.picpay.ports.out.PublishCpfValidationOutPutPort;
 import com.picpay.ports.out.SendCpfForValidationOutputPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,11 +20,12 @@ public class InsertCustomerUseCase implements InsertCustomerInputPort {
     private final ValidateAndPublishCpfUseCase validateAndPublishCpfUseCase;
 
     @Override
-    public void insert(Customer customer, String zipCode ){
+    public boolean insert(Customer customer, String zipCode ){
             var address = findAddressByZipCodeOutpuPort.find(zipCode);
         customer.setAddress(address);
-        insertCustomerOutpuPort.insert(customer);
+        boolean response = insertCustomerOutpuPort.insert(customer);
         sendCpfForValidationOutputPort.sendValidation(customer.getCpf());
+        return response;
     }
 
 }

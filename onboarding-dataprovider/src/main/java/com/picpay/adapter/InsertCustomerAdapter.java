@@ -17,9 +17,14 @@ public class InsertCustomerAdapter implements InsertCustomerOutpuPort {
     @Autowired
     private CustomerEntityMapper customerEntityMapper;
 
-    public void insert(Customer customer) {
+    public boolean insert(Customer customer) {
         CustomerEntity customerEntity = customerEntityMapper.toCustomerEntity(customer);
-        customerRepository.save(customerEntity);
+        if(customerRepository.findByCpf(customerEntity.getCpf()) != null){
+            return false;
+        } else{
+            customerRepository.save(customerEntity);
+            return true;
+        }
     }
 }
 //

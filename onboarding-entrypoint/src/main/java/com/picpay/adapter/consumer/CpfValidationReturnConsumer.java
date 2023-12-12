@@ -33,7 +33,7 @@ public class CpfValidationReturnConsumer {
     public void validate(ValidateCpfDTO cpf){
         validateCpfInputPort.validate(cpf.getCpf(), cpf.isValidate());
     }
-//    @Bean
+    @Bean
     public Consumer<ValidateCpfDTO> validateCPF(){
         return this::validate;
     }
