@@ -4,5 +4,5 @@ import com.picpay.domain.Customer;
 
 public interface InsertCustomerInputPort {
 
-    boolean insert(Customer customer, String zipCode);
+    void insert(Customer customer, String zipCode);
 }
