@@ -1,6 +1,5 @@
 package com.picpay.usecase;
 
-import com.picpay.exceptions.CpfAlreadyExistsException;
 import com.picpay.exceptions.CpfNotFoundException;
 import com.picpay.ports.in.ValidateCpfInputPort;
 import com.picpay.ports.out.FIndCustomerByCpfOutputPort;
@@ -16,7 +15,7 @@ public class UpdateValidCpfUseCase implements ValidateCpfInputPort {
 
     @Override
     public void validate(String cpf, boolean status){
-        var customer = fIndCustomerByCpfOutputPort.findByCpf(cpf).
+        var customer = fIndCustomerByCpfOutputPort.find(cpf).
                 orElseThrow(() -> new CpfNotFoundException("Invalid CPF"));
         customer.setIsValidCpf(status);
         validateCpfOutputPort.updateValidCpf(customer);

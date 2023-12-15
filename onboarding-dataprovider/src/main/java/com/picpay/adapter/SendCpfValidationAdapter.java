@@ -15,8 +15,8 @@ import java.util.Objects;
 @Component
 @RequiredArgsConstructor
 public class SendCpfValidationAdapter implements SendCpfForValidationOutputPort {
-
     private final KafkaProducer<String> kafkaProducer;
+
     @Override
     public void sendValidation(String cpf) {
         kafkaProducer.publish(cpf, "sendCPF-out-0");

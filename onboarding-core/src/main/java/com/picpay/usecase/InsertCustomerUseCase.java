@@ -15,10 +15,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Service
 public class InsertCustomerUseCase implements InsertCustomerInputPort {
-
-
     private final FindAddressByZipCodeOutpuPort findAddressByZipCodeOutpuPort;
-
     private final InsertCustomerOutpuPort insertCustomerOutpuPort;
     private final SendCpfForValidationOutputPort sendCpfForValidationOutputPort;
     private final ValidateAndPublishCpfUseCase validateAndPublishCpfUseCase;
@@ -32,7 +29,7 @@ public class InsertCustomerUseCase implements InsertCustomerInputPort {
         }catch(Exception e){
             throw new AddresNotFoundException("Invalid ZipCode");
         }
-        boolean isPresent = fIndCustomerByCpfOutputPort.findByCpf(customer.getCpf()).isPresent();
+        boolean isPresent = fIndCustomerByCpfOutputPort.find(customer.getCpf()).isPresent();
         if(isPresent){
             throw new CpfAlreadyExistsException("Cpf already exists");
         }
@@ -40,5 +37,4 @@ public class InsertCustomerUseCase implements InsertCustomerInputPort {
         insertCustomerOutpuPort.insert(customer);
         sendCpfForValidationOutputPort.sendValidation(customer.getCpf());
     }
-
 }

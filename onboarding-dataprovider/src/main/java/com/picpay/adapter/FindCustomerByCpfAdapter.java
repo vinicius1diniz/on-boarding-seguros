@@ -16,7 +16,7 @@ public class FindCustomerByCpfAdapter implements FIndCustomerByCpfOutputPort {
     private final CustomerRepository customerRepository;
     private final CustomerEntityMapper customerEntityMapper;
     @Override
-    public Optional<Customer> findByCpf(String cpf) {
+    public Optional<Customer> find(String cpf) {
         Optional<CustomerEntity> customerEntity = customerRepository.findByCpf(cpf);
         return customerEntity.map(customerEntityMapper::toCustomer);
     }

@@ -7,8 +7,6 @@ import com.picpay.domain.Customer;
 
 @Mapper(componentModel = "spring")
 public interface CustomerMapper {
-
-
     @Mapping(target = "address", ignore = true)
     @Mapping(target = "isValidCpf", ignore = true)
     Customer toCustomer(CustomerRequest customerRequest);

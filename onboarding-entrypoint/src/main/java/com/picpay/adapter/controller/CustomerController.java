@@ -18,14 +18,11 @@ import org.springframework.web.bind.annotation.*;
 //@Api(value = "Customer")
 @RequestMapping("/api/v1/customers")
 public class CustomerController {
-
     @Autowired
     private InsertCustomerInputPort insertCustomerInputPort;
-
     @Autowired
     private CustomerMapper customerMapper;
 
-//    @ApiOperation(value = "Insere customer, validando seu cpf")
     @PostMapping(value = "/post", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> insert(@Valid @RequestBody CustomerRequest customerRequest){
         var customer = customerMapper.toCustomer(customerRequest);

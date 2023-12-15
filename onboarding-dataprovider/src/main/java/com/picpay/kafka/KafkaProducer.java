@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 public class KafkaProducer<T> {
     private final ObjectMapper objectMapper;
     private final StreamBridge streamBridge;
+
     public void publish(T message, String binding){
 
         String jsonMessage = null;
