@@ -1,0 +1,65 @@
+server:
+  port: 8081
+
+jhonatas:
+  client:
+    address:
+      url: http://localhost:8082/addresses
+
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      authentication-database: admin
+      username: root
+      password: example
+      database: hexagonal
+  cloud:
+    stream:
+      kafka:
+        binder:
+          configuration:
+            retries: 3
+          brokers: localhost:9092
+          autoAddPartitions: true
+          replication-factor: 1
+          autoCreateTopics: true
+          producer-properties:
+            key:
+              serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+        bindings:
+          receiveCPF-in-0:
+            consumer:
+              enableDlq: false
+              autoCommitOffset: true
+              autoCommitOnError: true
+              configuration:
+                max.poll.records: 5
+                max.poll.interval.ms: 3600000
+          validateCPF-in-0:
+            consumer:
+              enableDlq: false
+              autoCommitOffset: true
+              autoCommitOnError: true
+              configuration:
+                max.poll.records: 5
+                max.poll.interval.ms: 3600000
+
+      bindings:
+        sendCPF-out-0:
+          destination: tp-cpf-validation
+          contentType: application/json
+        sendValidation-out-0:
+          destination: tp-cpf-validation-return
+          contentType: application/json
+        receiveCPF-in-0:
+          destination: tp-cpf-validation
+          group: tp-cpf-group-validation
+          contentType: application/json
+        validateCPF-in-0:
+          destination: tp-cpf-validation-return
+          group: tp-cpf-group-validation2
+          contentType: application/json
+    function:
+      definition: receiveCPF;validateCPF
